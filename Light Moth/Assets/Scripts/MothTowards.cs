@@ -10,21 +10,32 @@ public class MothTowards : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Collider[] lights = Physics.OverlapSphere(this.transform.position, mothOverlap, LayerMask.GetMask("Light"));
+        Collider2D[] lights = Physics2D.OverlapCircleAll((Vector2)this.transform.position, mothOverlap, LayerMask.GetMask("Light"));
 
-        for(int i = 0; i < lights.Length; i++)
-        {   
-            LightIntensity _li = lights[i].GetComponent<LightIntensity>();
+        if (lights.Length > 0)
+        {
+            for (int i = 0; i < lights.Length; i++)
+            {
+                Dimmer dim = lights[i].GetComponent<Dimmer>();
 
-            Vector2 vectorTowardsLight = lights[i].transform.position - transform.position;
+                Vector2 vectorTowardsLight = lights[i].transform.position - transform.position;
 
-            transform.Translate(vectorTowardsLight.normalized * _li.intensity * maxSpeed * Time.deltaTime);
+                transform.Translate(vectorTowardsLight.normalized * dim.intensity * maxSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            GameObject.Find("SpawnPoint").gameObject.GetComponent<SpawnPoint>().Respawn();
         }
     }
 
