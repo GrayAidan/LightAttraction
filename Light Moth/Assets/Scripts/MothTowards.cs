@@ -5,6 +5,7 @@ using UnityEngine;
 public class MothTowards : MonoBehaviour
 {
     public float maxSpeed;
+    public float speed;
     public float mothOverlap;
 
     private Rigidbody2D _rb;
@@ -28,9 +29,9 @@ public class MothTowards : MonoBehaviour
 
                 Vector2 vectorTowardsLight = lights[i].transform.position - transform.position;
 
-                _rb.AddForce(vectorTowardsLight.normalized * dim.intensity * maxSpeed * Time.deltaTime);
+                _rb.AddForce(vectorTowardsLight.normalized * dim.intensity * speed * Time.deltaTime);
 
-                Vector2 velocity = Vector2.ClampMagnitude(_rb.velocity, 1);
+                Vector2 velocity = Vector2.ClampMagnitude(_rb.velocity, maxSpeed);
                 _rb.velocity = velocity;
             }
         }

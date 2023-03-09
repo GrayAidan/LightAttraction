@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     public GameObject mothPrefab;
-
+    public GameObject deadMoth;
     public GameObject currentMoth;
 
     // Start is called before the first frame update
@@ -18,6 +18,7 @@ public class SpawnPoint : MonoBehaviour
     {
         if (currentMoth != null)
         {
+            Instantiate(deadMoth, currentMoth.transform.position, currentMoth.transform.rotation);
             Destroy(currentMoth);
         }
 

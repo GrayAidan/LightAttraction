@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Dimmer : MonoBehaviour
 {
-    [HideInInspector]
     public float intensity;
     public float lightSpriteMaxSize;
 
@@ -22,6 +21,8 @@ public class Dimmer : MonoBehaviour
         _mo = GetComponent<MouseOver>();
         _sr = transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
         _sr.color = new Color(_sr.color.r, _sr.color.g, _sr.color.b, 0);
+
+        DimmerOpen();
     }
 
     // Update is called once per frame
