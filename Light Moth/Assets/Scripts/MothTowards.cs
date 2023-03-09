@@ -6,11 +6,13 @@ public class MothTowards : MonoBehaviour
 {
     public float maxSpeed;
     public float mothOverlap;
-    
+
+    private Rigidbody2D _rb;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,7 +28,10 @@ public class MothTowards : MonoBehaviour
 
                 Vector2 vectorTowardsLight = lights[i].transform.position - transform.position;
 
-                transform.Translate(vectorTowardsLight.normalized * dim.intensity * maxSpeed * Time.deltaTime);
+                _rb.AddForce(vectorTowardsLight.normalized * dim.intensity * maxSpeed * Time.deltaTime);
+
+                Vector2 velocity = Vector2.ClampMagnitude(_rb.velocity, 1);
+                _rb.velocity = velocity;
             }
         }
     }
