@@ -9,11 +9,13 @@ public class MothTowards : MonoBehaviour
     public float mothOverlap;
 
     private Rigidbody2D _rb;
+    private SpriteRenderer _sr;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _sr = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,7 +35,17 @@ public class MothTowards : MonoBehaviour
 
                 Vector2 velocity = Vector2.ClampMagnitude(_rb.velocity, maxSpeed);
                 _rb.velocity = velocity;
+                print(lights[i]);
             }
+        }
+
+        if(_rb.velocity.x < 0)
+        {
+            _sr.flipX = false;
+        }
+        else
+        {
+            _sr.flipX = true;
         }
     }
 
@@ -41,7 +53,7 @@ public class MothTowards : MonoBehaviour
     {
         if(collision.gameObject.layer == 7)
         {
-            GameObject.Find("SpawnPoint").gameObject.GetComponent<SpawnPoint>().Respawn();
+            GameObject.Find("SpawnPoint").gameObject.GetComponent<SpawnPoint>().Respawn(true);
         }
     }
 

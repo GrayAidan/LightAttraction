@@ -11,14 +11,18 @@ public class SpawnPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Respawn();
+        Respawn(false);
     }
 
-    public void Respawn()
+    public void Respawn(bool die)
     {
         if (currentMoth != null)
         {
-            Instantiate(deadMoth, currentMoth.transform.position, currentMoth.transform.rotation);
+            if (die)
+            {
+                Instantiate(deadMoth, currentMoth.transform.position, currentMoth.transform.rotation);
+            }
+            
             Destroy(currentMoth);
         }
 

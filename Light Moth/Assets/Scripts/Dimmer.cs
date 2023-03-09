@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Dimmer : MonoBehaviour
 {
     public float intensity;
+    
     public float lightSpriteMaxSize;
 
     public GameObject sliderCanvas;
@@ -15,10 +16,15 @@ public class Dimmer : MonoBehaviour
     private Slider currentSliderBar;
     private SpriteRenderer _sr;
 
+    public bool alwaysOn;
+    public bool otherLight;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         _mo = GetComponent<MouseOver>();
+
         _sr = transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
         _sr.color = new Color(_sr.color.r, _sr.color.g, _sr.color.b, 0);
 
@@ -28,7 +34,7 @@ public class Dimmer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_mo.mouseOver)
+        if (_mo.mouseOver && !alwaysOn)
         {
             DimmerOpen();
         }
@@ -57,8 +63,12 @@ public class Dimmer : MonoBehaviour
         }
 
         intensity = currentSliderBar.value;
-        _sr.transform.localScale = new Vector2(lightSpriteMaxSize * intensity, lightSpriteMaxSize * intensity);
-        _sr.color = new Color(_sr.color.r, _sr.color.g, _sr.color.b, intensity / 2.5f);
+        if (!otherLight)
+        {
+            _sr.transform.localScale = new Vector2(lightSpriteMaxSize * intensity, lightSpriteMaxSize * intensity);
+        }
+        
+        _sr.color = new Color(_sr.color.r, _sr.color.g, _sr.color.b, intensity / 2f);
     }
 
     private void OnDrawGizmos()
