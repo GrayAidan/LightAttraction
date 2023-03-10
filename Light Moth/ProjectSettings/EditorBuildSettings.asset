@@ -8,13 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: bcd120b416cbf2f43bc0ff3c52f1fa80
-  - enabled: 1
-    path: Assets/Scenes/LobbyScene.unity
-    guid: 27bd960a3cbd5b94080bd864ccfbcf6d
-  - enabled: 1
-    path: Assets/Scenes/GymScene.unity
-    guid: a3b63ed64ab316b49a26f8123bbe98ec
-  - enabled: 1
-    path: Assets/Scenes/PartyScene.unity
-    guid: ab5a1a41bbe05d840b82791a3ab01f6f
   m_configObjects: {}
